@@ -23,12 +23,12 @@ col1, col2 = st.columns(2)
 if ticker != "":
         
     data = yf.download(tickers = ticker, period = "5d", progress = False)
-    delta = np.round(((data["Adj Close"][-1]-data["Adj Close"][-2])/data["Adj Close"][-2])*100, 2)
+    delta = np.round(((data["Adj Close"][-2]-data["Adj Close"][-1])/data["Adj Close"][-2])*100, 2)
     
     with col1:
             
         st.metric(label = "Close", value = f"${np.round(data['Adj Close'][-1], 2)}", delta = f"{delta}%")
-        st.metric(label = "Transactions volume", value = f"{data['Volume'][-1]}")
+        st.metric(label = "Transactions volume", value = f"${data['Volume'][-1]}")
         
     with col2:
         
