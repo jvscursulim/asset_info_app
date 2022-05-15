@@ -41,7 +41,7 @@ else:
     with col1:
                 
         st.metric(label = "Close", value = "$0.00", delta = "0.00%")
-        st.metric(label = "Transactions volume", value = "0")
+        st.metric(label = "Transactions volume", value = "$0")
     
     with col2:
         
