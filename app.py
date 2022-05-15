@@ -14,7 +14,24 @@ st.title("Asset information app")
 
 ticker = st.text_input(label = "Asset ticker: ")
 
-st.header(f"{ticker}")
+if ticker != "":
+    
+    asset = yf.Ticker(ticker = ticker)
+    
+    if not 'shortName' in asset.info.keys():
+        
+        st.header(f"{ticker}")
+    else:
+        
+        st.header(f"{asset.info['shortName']}")
+    
+    with st.container():
+        
+        image_url = asset.info['logo_url']
+        
+        if image_url != "":
+            st.image(asset.info['logo_url'])
+    
 st.header("Most recent data")
 st.write("Source: Yahoo Finance API")
 
@@ -27,6 +44,7 @@ if ticker != "":
     
     with col1:
             
+        st.write(f"Currency: {asset.info['currency']}")
         st.metric(label = "Close", value = f"${np.round(data['Adj Close'][-1], 2)}", delta = f"{delta}%")
         st.metric(label = "Transactions volume", value = f"${data['Volume'][-1]}")
         
